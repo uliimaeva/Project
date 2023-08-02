@@ -6,51 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_TIL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_search">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_TIET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="введите текст"
-            android:layout_margin="10dp">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/search_TIL"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:endIconMode="custom"-->
+<!--        app:endIconDrawable="@drawable/ic_search">-->
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/search_TIET"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="введите текст"-->
+<!--            android:layout_margin="10dp">-->
+<!--        </com.google.android.material.textfield.TextInputEditText>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:src="@drawable/line"
-        android:layout_below="@id/search_TIL"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/line"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:src="@drawable/line"-->
+<!--        android:layout_below="@id/search_TIL"/>-->
 
-    <ImageButton
-        android:id="@+id/i"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/img"
-        android:layout_below="@id/line"
-        android:layout_centerHorizontal="true"/>
+<!--    <ImageButton-->
+<!--        android:id="@+id/i"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:src="@drawable/img"-->
+<!--        android:layout_below="@id/line"-->
+<!--        android:layout_centerHorizontal="true"/>-->
 
 
 
-    <TextView
-        android:id="@+id/selectedFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/i"
-        android:text="no selected file"
-        android:textAlignment="center"/>
+<!--    <TextView-->
+<!--        android:id="@+id/selectedFile"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/i"-->
+<!--        android:text="no selected file"-->
+<!--        android:textAlignment="center"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerSearch"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_below="@id/selectedFile"/>
+        android:layout_margin="15dp"/>
 </RelativeLayout>

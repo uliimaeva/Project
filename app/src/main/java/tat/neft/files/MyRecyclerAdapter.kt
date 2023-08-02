@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +17,8 @@ class MyRecyclerAdapter(private var files: List<MyFile>) :
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        val titleTextView: TextView = itemView.findViewById(R.id.textView_name)
-        val singerTextView: TextView = itemView.findViewById(R.id.textView_path)
+        val icon: ImageView = itemView.findViewById(R.id.icon)
+        val text: TextView = itemView.findViewById(R.id.text)
 
         init {
             itemView.setOnClickListener {
@@ -26,7 +27,7 @@ class MyRecyclerAdapter(private var files: List<MyFile>) :
         }
 
         override fun onClick(p0: View?) {
-            Toast.makeText(itemView.context, "${titleTextView.text} pressed!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(itemView.context, "${text.text} pressed!", Toast.LENGTH_SHORT).show()
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,8 +38,8 @@ class MyRecyclerAdapter(private var files: List<MyFile>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.titleTextView.text = files[position].name
-        holder.singerTextView.text = files[position].path
+//        holder.titleTextView.text = files[position].name
+//        holder.singerTextView.text = files[position].path
     }
 
     override fun getItemCount(): Int {
