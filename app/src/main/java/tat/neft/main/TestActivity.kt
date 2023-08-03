@@ -16,6 +16,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import tat.neft.R
+import tat.neft.files.ConfigWorker
+import tat.neft.files.MyFile
 import java.io.File
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
@@ -35,47 +37,52 @@ class TestActivity : AppCompatActivity() {
             ),
             PackageManager.PERMISSION_GRANTED
         )
+    }
 
-        @SuppressLint("IntentReset")
-        @RequiresApi(Build.VERSION_CODES.Q)
-        fun buttonCreateFile(view: View?) {
-            xmlFileExport()
-        }
-
-        @RequiresApi(Build.VERSION_CODES.Q)
-        fun buttonOpenFile(view: View?) {
-        val intent = Intent(Intent.ACTION_VIEW, MediaStore.Downloads.EXTERNAL_CONTENT_URI)
-        //        intent.setType("application/pdf");
-        intent.type = "*/*"
-        this.startActivity(intent)
+    @SuppressLint("IntentReset")
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun buttonCreateFile(view: View?) {
+        val config = ConfigWorker(applicationContext)
+        for (app in config.readConfig()) {
+            Log.wtf("CONFIG", "ХУЙ ПИЗДА " + app.url)
         }
     }
 
-    fun xmlFileExport() {
-        val fileName = "q.txt"
-        val fileContent = "icon test.xml\nname cruaso\nurl www.google.com"
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val contentValues = ContentValues().apply {
-                put(MediaStore.Downloads.DISPLAY_NAME, fileName)
-                put(MediaStore.Downloads.MIME_TYPE, "application/txt")
-                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
-            }
-            contentValues.put(MediaStore.Downloads.RELATIVE_PATH, "Download/" + "test")
-            val resolver = this.contentResolver
-
-            val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
-            Toast.makeText(this, "successful", Toast.LENGTH_LONG).show()
-
-            if (uri != null) {
-                val fileOutputStream = resolver.openOutputStream(uri)
-                fileOutputStream?.write(fileContent.toByteArray())
-                fileOutputStream?.close()
-
-            } else {
-                Toast.makeText(this, "Can\'t resolve media path", Toast.LENGTH_LONG).show()
-
-            }
-        }
+    @SuppressLint("NewApi")
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun buttonOpenFile(view: View?) {
+        val config = ConfigWorker(applicationContext)
+        config.addOption(MyFile("", "AAAAAAAAAAA", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"))
+        //val intent = Intent(Intent.ACTION_VIEW, MediaStore.Downloads.EXTERNAL_CONTENT_URI)
+        //        intent.setType("application/pdf");
+        //intent.type = "*/*"
+        //this.startActivity(intent)
     }
 }
+
+//fun xmlFileExport() {
+//    val fileName = "q.txt"
+//    val fileContent = "icon test.xml\nname cruaso\nurl www.google.com"
+//
+//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//        val contentValues = ContentValues().apply {
+//            put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+//            put(MediaStore.Downloads.MIME_TYPE, "application/txt")
+//            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+//        }
+//        contentValues.put(MediaStore.Downloads.RELATIVE_PATH, "Download/" + "test")
+//        val resolver = this.contentResolver
+//
+//        val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+//        Toast.makeText(this, "successful", Toast.LENGTH_LONG).show()
+//
+//        if (uri != null) {
+//            val fileOutputStream = resolver.openOutputStream(uri)
+//            fileOutputStream?.write(fileContent.toByteArray())
+//            fileOutputStream?.close()
+//        } else {
+//            Toast.makeText(this, "Can\'t resolve media path", Toast.LENGTH_LONG).show()
+//
+//        }
+//    }
+//}
