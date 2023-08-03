@@ -1,16 +1,21 @@
 package tat.neft.main
 
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkerParameters
 import tat.neft.R
-import tat.neft.files.MyFile
 import tat.neft.files.MyAdapter
+import tat.neft.files.MyFile
 import java.io.File
 
 
@@ -36,6 +41,13 @@ class MainActivity : AppCompatActivity() {
 
         //readFiles()
     }
+
+    fun readFiles() {
+        val fileName = "test.txt"
+        val lines: List<String> = File(fileName).readLines()
+        lines.forEach { line -> Toast.makeText(this, line, Toast.LENGTH_SHORT).show() }
+    }
+
 
     fun updateAdapterList() {
         adapter.setFilteredList(fileArray)

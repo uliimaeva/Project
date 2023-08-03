@@ -37,7 +37,7 @@ class AuthorizationActivity : AppCompatActivity() {
             u_password = password_et.text.toString()
 
             when (logIn(u_login, u_password)) {
-                true -> startActivity(Intent(this, MainActivity::class.java))
+                true -> startActivity(Intent(this, TestActivity::class.java))
                 false -> Toast.makeText(this, "smth wrong", Toast.LENGTH_SHORT).show()
             }
         }
