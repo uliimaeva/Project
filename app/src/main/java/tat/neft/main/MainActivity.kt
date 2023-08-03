@@ -1,46 +1,50 @@
 package tat.neft.main
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.ImageButton
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import tat.neft.R
 import tat.neft.files.MyFile
-import tat.neft.files.MyFileLister
-import tat.neft.files.MyRecyclerAdapter
+import tat.neft.files.MyAdapter
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var recyclerView: RecyclerView
+    private var fileArray: ArrayList<MyFile> = ArrayList()
+    lateinit var adapter: MyAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
+        val gridLayoutManager = GridLayoutManager(this, 3)
 
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = gridLayoutManager
 
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        adapter  = MyAdapter(this, fileArray)
+        recyclerView.adapter = adapter
 
-        val mfl: MyFileLister = MyFileLister()
-        val recyclerAdapter = MyRecyclerAdapter(mfl.getDirectoryFilesList())
-        recyclerView.adapter = recyclerAdapter
+        //readFiles()
+    }
 
+    fun updateAdapterList() {
+        adapter.setFilteredList(fileArray)
+    }
 
 //        val image: ImageButton = findViewById(R.id.i)
 //        image.setOnClickListener {
 //            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gismeteo.ru/weather-almetevsk-11940/now/")))
 //        }
 
-    }
+
 }

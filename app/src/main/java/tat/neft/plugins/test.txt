@@ -1,0 +1,3 @@
+icon = "test_icon"
+text = "cruaso"
+url = "https://www.russianfood.com/recipes/recipe.php?rid=150425"
