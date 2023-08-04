@@ -41,19 +41,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         var config = worker.readConfig()
-        adapter = MyAdapter(this    , this, config)
+        adapter = MyAdapter(this, this, config)
         recyclerView.adapter = adapter
-
-        getInfo()
 
 
 
         //readFiles()
-    }
-
-    fun getInfo(){
-
-
     }
 
     fun readFiles() {

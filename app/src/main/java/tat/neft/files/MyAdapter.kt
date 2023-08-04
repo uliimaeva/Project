@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tat.neft.R
 import tat.neft.main.MainActivity
+import tat.neft.plugins.test
 
 
 class MyAdapter(
@@ -52,10 +53,10 @@ class MyAdapter(
         holder.icon.setImageDrawable(drawable)
         holder.name.text = fileArray[position].text
 
-        holder.mainLayout.setOnClickListener({
+        holder.mainLayout.setOnClickListener {
             val url = fileArray[position].url
-            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        })
+            context.startActivity(Intent(context, test::class.java))
+        }
     }
 
     override fun getItemCount(): Int {
