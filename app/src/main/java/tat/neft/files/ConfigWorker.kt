@@ -15,7 +15,7 @@ import java.io.OutputStreamWriter
 class ConfigWorker(val context: Context) {
     val CONFIG_NAME: String = "config.json"
     val CONFIG_PATH: String = "/storage/emulated/0/Download/" + CONFIG_NAME
-    val DEFAULT_CONFIG: MutableList<MyFile> = mutableListOf(MyFile("test.xml", "Test App", "www.google.com"))
+    val DEFAULT_CONFIG: MutableList<MyFile> = mutableListOf(MyFile("test", "Test App", "https://www.google.com"))
 
     fun configExists(): Boolean {
         return File(CONFIG_PATH).exists()

@@ -5,12 +5,16 @@ package tat.neft.files
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tat.neft.R
+import tat.neft.main.MainActivity
 
 
 class MyAdapter(
@@ -26,6 +30,7 @@ class MyAdapter(
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val name: TextView = itemView.findViewById(R.id.text)
         val icon: ImageView = itemView.findViewById(R.id.icon)
+        val mainLayout: LinearLayout = itemView.findViewById(R.id.mainLayout)
         var url: String = ""
     }
 
@@ -46,7 +51,11 @@ class MyAdapter(
         )
         holder.icon.setImageDrawable(drawable)
         holder.name.text = fileArray[position].text
-        holder.url = fileArray[position].url
+
+        holder.mainLayout.setOnClickListener({
+            val url = fileArray[position].url
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        })
     }
 
     override fun getItemCount(): Int {

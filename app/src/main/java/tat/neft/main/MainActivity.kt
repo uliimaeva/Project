@@ -32,16 +32,27 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayoutManager
 
+
+
+        val worker = ConfigWorker(applicationContext)
+
+        for (app in worker.readConfig()) {
+            Log.wtf("CONFIG", "aboba " + app.url)
+        }
+
+        var config = worker.readConfig()
+        adapter = MyAdapter(this    , this, config)
+        recyclerView.adapter = adapter
+
         getInfo()
+
+
 
         //readFiles()
     }
 
     fun getInfo(){
-        val worker = ConfigWorker(applicationContext)
-        var config = worker.readConfig()
-        adapter = MyAdapter(this, this, config)
-        recyclerView.adapter = adapter
+
 
     }
 
