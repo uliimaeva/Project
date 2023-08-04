@@ -44,7 +44,7 @@ class TestActivity : AppCompatActivity() {
     fun buttonCreateFile(view: View?) {
         val config = ConfigWorker(applicationContext)
         for (app in config.readConfig()) {
-            Log.wtf("CONFIG", "ХУЙ ПИЗДА " + app.url)
+            Log.wtf("CONFIG", "aboba " + app.url)
         }
     }
 

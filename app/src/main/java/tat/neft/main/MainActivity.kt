@@ -1,11 +1,7 @@
 package tat.neft.main
 
-import android.app.DownloadManager
-import android.content.Context
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -13,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tat.neft.R
+import tat.neft.files.ConfigWorker
 import tat.neft.files.MyAdapter
 import tat.neft.files.MyFile
 import java.io.File
@@ -35,10 +32,17 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayoutManager
 
-        adapter  = MyAdapter(this, fileArray)
-        recyclerView.adapter = adapter
+        getInfo()
 
         //readFiles()
+    }
+
+    fun getInfo(){
+        val worker = ConfigWorker(applicationContext)
+        var config = worker.readConfig()
+        adapter = MyAdapter(this, this, config)
+        recyclerView.adapter = adapter
+
     }
 
     fun readFiles() {
