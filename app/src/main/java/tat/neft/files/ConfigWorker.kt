@@ -1,52 +1,42 @@
 package tat.neft.files
 
-import android.content.ContentValues
-import android.content.Context
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
-import android.widget.Toast
-import kotlinx.serialization.encodeToString
+import android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat.requestPermissions
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileInputStream
-import java.io.OutputStreamWriter
 
-class ConfigWorker(val context: Context) {
-    val CONFIG_NAME: String = "config.json"
-    val CONFIG_PATH: String = "/storage/emulated/0/Download/" + CONFIG_NAME
-    val DEFAULT_CONFIG: MutableList<MyFile> = mutableListOf(MyFile("test", "Test App", "https://www.google.com"))
 
-    fun configExists(): Boolean {
-        return File(CONFIG_PATH).exists()
-    }
+class ConfigWorker(val activity: Activity) {
+    private val CONFIG_PATH: String = "/storage/emulated/0/Download"
 
     fun readConfig(): MutableList<MyFile> {
-        if (!configExists()) {
-            dumpConfig(DEFAULT_CONFIG)
-            return DEFAULT_CONFIG
+        requestPermissions(
+            activity, arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
+            PackageManager.PERMISSION_GRANTED
+        )
+        val res: MutableList<MyFile> = mutableListOf()
+        val configDir = File(CONFIG_PATH)
+        val files = configDir.listFiles()
+        for (file in files!!) {
+            Log.d("JOPA", "JOPA " + file.name + " " + file.extension)
+            if (!(file.isFile && file.extension == "json")) {
+                continue
+            }
+            val fileText = FileInputStream(file).bufferedReader().use { it.readText() }
+            res.add(Json.decodeFromString(fileText))
         }
-
-        val text = FileInputStream(File(CONFIG_PATH)).bufferedReader().use { it.readText() }
-        return Json.decodeFromString(text)
-    }
-
-    fun dumpConfig(values: MutableList<MyFile>) {
-        val json = Json.encodeToString(values)
-        File(CONFIG_PATH).writeBytes(json.toByteArray())
-    }
-
-    fun optionExists(option: MyFile): Boolean {
-        return readConfig().filter { f -> f.url == option.url }.isNotEmpty()
-    }
-
-    fun addOption(option: MyFile) {
-        val newConfig = readConfig().filter { f -> f.url != option.url }.toMutableList()
-        newConfig.add(option)
-        dumpConfig(newConfig)
-    }
-
-    fun deleteOption(option: MyFile) {
-        dumpConfig(readConfig().filter { f -> f.url != option.url }.toMutableList())
+        return res
     }
 }
