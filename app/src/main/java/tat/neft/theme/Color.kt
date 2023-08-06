@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.theme
+package tat.neft.theme
 
 import androidx.compose.ui.graphics.Color
 
