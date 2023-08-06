@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tat.neft.R
 import tat.neft.main.MainActivity
-import tat.neft.plugins.test
+import tat.neft.plugins.TimerApp
 
 
 class MyAdapter(
@@ -32,7 +32,6 @@ class MyAdapter(
         val name: TextView = itemView.findViewById(R.id.text)
         val icon: ImageView = itemView.findViewById(R.id.icon)
         val mainLayout: LinearLayout = itemView.findViewById(R.id.mainLayout)
-        var url: String = ""
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -55,7 +54,8 @@ class MyAdapter(
 
         holder.mainLayout.setOnClickListener {
             val url = fileArray[position].url
-            context.startActivity(Intent(context, test::class.java))
+            var cl = activity.classLoader.loadClass("tat.neft.plugins." + url).getDeclaredConstructor().newInstance()
+            context.startActivity(Intent(context, cl::class.java))
         }
     }
 
