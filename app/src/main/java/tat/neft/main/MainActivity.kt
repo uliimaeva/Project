@@ -1,11 +1,15 @@
 package tat.neft.main
-
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.BuildCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tat.neft.R
@@ -21,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var fileArray: ArrayList<MyFile> = ArrayList()
     lateinit var adapter: MyAdapter
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,20 +37,18 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = gridLayoutManager
 
 
-
-        val worker = ConfigWorker(applicationContext)
-
-        for (app in worker.readConfig()) {
-            Log.wtf("CONFIG", "aboba " + app.url)
+        if (!Environment.isExternalStorageManager()) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                Uri.parse("package:" + applicationContext.packageName)
+            )
+            startActivity(intent)
         }
 
+        val worker = ConfigWorker(this)
         var config = worker.readConfig()
         adapter = MyAdapter(this, this, config)
         recyclerView.adapter = adapter
-
-
-
-        //readFiles()
     }
 
     fun readFiles() {
