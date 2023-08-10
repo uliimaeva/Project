@@ -28,6 +28,14 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".plugins.TextApp"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".plugins.LemonApp"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".main.MainActivity"
             android:exported="false" />
         <activity
