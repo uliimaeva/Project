@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,13 +37,17 @@ class DrawableApp : ComponentActivity() {
 
 @Composable
 private fun App() {
+    var result by remember {
+        mutableStateOf(0)
+    }
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("App!")
-            Picture()
+            Button(onClick = { result = (1..6).random() }) {
+                Text(result.toString())
+            }
         }
     }
 }

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Project"
 include(":app")
+include(":exampleExternalApp")

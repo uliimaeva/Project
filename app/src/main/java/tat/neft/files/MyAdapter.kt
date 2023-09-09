@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import dalvik.system.DexClassLoader
 import tat.neft.R
 import tat.neft.main.MainActivity
 import tat.neft.plugins.TimerApp
@@ -53,8 +54,11 @@ class MyAdapter(
         holder.name.text = fileArray[position].text
 
         holder.mainLayout.setOnClickListener {
-            val url = fileArray[position].url
-            var cl = activity.classLoader.loadClass("tat.neft.plugins." + url).getDeclaredConstructor().newInstance()
+            var loader = DexClassLoader("/storage/emulated/0/Download/classes.jar", activity.filesDir.absolutePath, null, activity.classLoader)
+            var cl = loader.loadClass("com.tatneft.exampleexternalapp.ExampleApp")
+            // АЛЬТЕРНАТИВНЫЙ ВАРИАНТ С ЗАГРУЗКОЙ ИЗ ЛОКАЛЬНЫХ РЕСУРСОВ
+            //val url = fileArray[position].url
+            //var cl = activity.classLoader.loadClass("tat.neft.plugins." + url).getDeclaredConstructor().newInstance()
             context.startActivity(Intent(context, cl::class.java))
         }
     }

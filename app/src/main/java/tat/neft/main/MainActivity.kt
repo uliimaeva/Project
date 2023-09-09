@@ -45,9 +45,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val worker = ConfigWorker(this)
-        var config = worker.readConfig()
-        adapter = MyAdapter(this, this, config)
+        adapter = MyAdapter(this, this, mutableListOf(MyFile("test", "test", "DrawableApp")))
         recyclerView.adapter = adapter
     }
 
