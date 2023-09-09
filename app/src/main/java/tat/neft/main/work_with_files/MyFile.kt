@@ -1,5 +1,4 @@
-package tat.neft.files
-import kotlinx.serialization.json.Json
+package tat.neft.main.work_with_files
 import kotlinx.serialization.Serializable
 
 @Serializable

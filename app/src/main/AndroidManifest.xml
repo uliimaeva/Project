@@ -28,10 +28,18 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".plugins.TextApp"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".plugins.LemonApp"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".main.AuthorizationActivity"
+            android:name=".main.authorization.AuthorizationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

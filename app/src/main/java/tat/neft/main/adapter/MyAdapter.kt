@@ -1,4 +1,4 @@
-package tat.neft.files
+package tat.neft.main.adapter
 
 //import com.bumptech.glide.Glide
 //import practice.library.retrofit.Common
@@ -7,7 +7,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,8 +14,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import dalvik.system.DexClassLoader
 import tat.neft.R
-import tat.neft.main.MainActivity
-import tat.neft.plugins.TimerApp
+import tat.neft.main.work_with_files.MyFile
 
 
 class MyAdapter(
@@ -66,12 +64,5 @@ class MyAdapter(
     override fun getItemCount(): Int {
         return fileArray.size
     }
-
-
-    fun setFilteredList(filteredBook: ArrayList<MyFile>) {
-        this.fileArray = filteredBook
-        notifyDataSetChanged()
-    }
-
 
 }

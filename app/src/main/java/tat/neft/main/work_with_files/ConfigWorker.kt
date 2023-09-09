@@ -1,14 +1,9 @@
-package tat.neft.files
+package tat.neft.main.work_with_files
 
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
-import android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat.requestPermissions
 import kotlinx.serialization.json.Json
 import java.io.File

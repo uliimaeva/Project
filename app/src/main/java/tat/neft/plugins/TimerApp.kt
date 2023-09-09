@@ -49,7 +49,7 @@ fun TimerComponent() {
         delay(1000L)
         secondsPassed += 1
     }
-    Text("${secondsPassed} сек. прошло с момента запуска приложения!")
+    Text("$secondsPassed сек. прошло с момента запуска приложения!")
 }
 
 @Preview
